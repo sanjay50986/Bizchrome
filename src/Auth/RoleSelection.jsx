@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,9 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Colors from '../constants/colors';
 
 const RoleSelection = () => {
+
+  const [selectedRole, setSelectedRole] = useState('client'); // 'client' or 'freelancer'
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerBg}>
@@ -23,7 +26,14 @@ const RoleSelection = () => {
       <View style={styles.content}>
         <Text style={styles.chooseText}>Join as a Client or Freelancer</Text>
 
-        <TouchableOpacity style={styles.chooseBox} activeOpacity={0.8}>
+        <TouchableOpacity
+          style={[
+            styles.chooseBox,
+            selectedRole === 'client' && { borderColor: Colors.textColor, borderWidth: 1 }
+          ]}
+          activeOpacity={0.8}
+          onPress={() => setSelectedRole('client')}
+        >
           <View style={styles.jobTitle}>
             <Image
               style={styles.chooseIcon}
@@ -34,10 +44,19 @@ const RoleSelection = () => {
               <Text style={styles.desHeader}>Looking for help with a project</Text>
             </View>
           </View>
-          <AntDesign name="checkcircle" size={20} color={Colors.textColor} />
+          {selectedRole === 'client' && (
+            <AntDesign name="checkcircle" size={20} color = {Colors.textColor}  />
+          )}
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.chooseBox} activeOpacity={0.8}>
+        <TouchableOpacity
+          style={[
+            styles.chooseBox,
+            selectedRole === 'freelancer' && { borderColor: Colors.textColor, borderWidth: 1 }
+          ]}
+          activeOpacity={0.8}
+          onPress={() => setSelectedRole('freelancer')}
+        >
           <View style={styles.jobTitle}>
             <Image
               style={styles.chooseIcon}
@@ -48,8 +67,16 @@ const RoleSelection = () => {
               <Text style={styles.desHeader}>Looking for my favorite work</Text>
             </View>
           </View>
-          <AntDesign name="checkcircle" size={20} color={Colors.textColor} />
+          {selectedRole === 'freelancer' && (
+            <AntDesign name="checkcircle" size={20} color={Colors.textColor} />
+          )}
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.createAccountBtn} activeOpacity={0.6}>
+          <Text style={styles.createAccountText}>Create a Account</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.login}>Already have an account ? <Text style={{color: Colors.textColor}}>Log In</Text></Text>
       </View>
     </SafeAreaView>
   );
@@ -71,7 +98,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   image: {
-    width: 160,   
+    width: 160,
     height: 160
   },
   content: {
@@ -113,5 +140,26 @@ const styles = StyleSheet.create({
     color: 'grey',
     fontFamily: 'Poppins-Regular',
     fontSize: 12
+  },
+
+  createAccountBtn: {
+    backgroundColor: Colors.primary,
+    marginTop: 30,
+    borderRadius: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+
+  createAccountText: {
+    color: "white",
+    fontFamily: "Poppins-Medium",
+
+  },
+
+  login: {
+    fontFamily: "Poppins-Medium",
+    textAlign: "center",
+    paddingTop: 10
   }
 });

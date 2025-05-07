@@ -2,7 +2,10 @@ import { SplashScreen } from "expo-router";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 import { View } from "react-native"; 
-import RoleSelection from "../src/Auth/RoleSelection";
+import ClientCreateAccount from "../src/Auth/ClientCreateAccount";
+import FreelenceCreateAccount from "../src/Auth/FreelenceCreateAccount";
+import Login from "../src/Auth/Login";
+
 
 
 // Prevent auto hide
@@ -27,7 +30,7 @@ export default function Index() {
 
   return (
     <View style={{ flex: 1 }}>
-      < RoleSelection/>
+      <Login/>
     </View>
   );
 }
